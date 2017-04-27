@@ -25,5 +25,16 @@ public:
 	void AimTowardsCrosshair();
 
 	bool bGetSightRayHitLocation(FVector & HitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+		float CrossHairXLocation = .5f;
+
+	UPROPERTY(EditAnywhere)
+		float CrossHairYLocation = 0.3333f;	
+
+	UPROPERTY(EditAnywhere)
+		float LineTraceRange = 1000000;
+
+	bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector & OutHitLocation) const;
 	
 };
