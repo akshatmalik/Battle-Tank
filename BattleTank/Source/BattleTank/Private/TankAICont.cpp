@@ -7,6 +7,7 @@
 
 void ATankAICont::BeginPlay()
 {
+	Super::BeginPlay();
 	auto ControlledTank = GetControlledTank();
 	if (!ControlledTank)
 	{
@@ -44,4 +45,13 @@ ATank *  ATankAICont::GetPlayerTank() const
 		return nullptr;
 	}
 	return Cast<ATank>(PlayerPawn);
+}
+
+
+void  ATankAICont::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	auto PlayerLocation = GetPlayerTank()->GetActorLocation();
+	GetPlayerTank()->AimAt(GetControlledTank()->GetName(),PlayerLocation);
+	
 }

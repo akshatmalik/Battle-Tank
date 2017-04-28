@@ -13,7 +13,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::BeginPlay()
 {
-
+	Super::BeginPlay();
 	auto ControlledTank = GetControlledTank();
 	if (!ControlledTank)
 	{
@@ -39,7 +39,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector OutHitLocation;
 	if (bGetSightRayHitLocation(OutHitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("OutHitLocation is: %s"), *OutHitLocation.ToString());
+		GetControlledTank()->AimAt(GetControlledTank()->GetName(),OutHitLocation);
 	}
 	//aim at crosshair
 }
@@ -77,3 +77,5 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	OutHitLocation = FVector(0.0f);
 	return false;
 }
+
+
