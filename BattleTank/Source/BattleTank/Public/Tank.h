@@ -28,4 +28,10 @@ public:
 
 	
 	void AimAt(FString Name, FVector);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent * BarrelToSet);
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float LaunchSpeed = 1000000.0f;
 };

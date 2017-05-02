@@ -20,6 +20,12 @@ void ATank::BeginPlay()
 	
 }
 
+
+void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
 // Called every frame
 void ATank::Tick( float DeltaTime )
 {
@@ -37,6 +43,6 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void ATank::AimAt(FString Name, FVector HitLocation)
 {
-	TankAimingComponent->AimAt(Name, HitLocation);
+	TankAimingComponent->AimAt(Name, HitLocation,LaunchSpeed);
 }
 
