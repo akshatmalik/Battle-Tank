@@ -33,7 +33,7 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 
 	// ...
 }
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -55,19 +55,27 @@ void UTankAimingComponent::AimAt(FString Name, FVector HitLocation, float Launch
 		false,
 		0.0f,
 		0.0f,
-		ESuggestProjVelocityTraceOption::TraceFullPath,
-		FCollisionResponseParams::DefaultResponseParam,
-		TArray<AActor*>(),
-		true
+		ESuggestProjVelocityTraceOption::DoNotTrace
 		))
 	{
 		auto BarrelLocation = Barrel->GetComponentLocation().ToString();
-		auto LaunchDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s with speed %f at direction %s"), *Name, *HitLocation.ToString(), *BarrelLocation, LaunchSpeed, *LaunchDirection.ToString());
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s with speed %f at direction %s"), *Name, *HitLocation.ToString(), *BarrelLocation, LaunchSpeed, *AimDirection.ToString());
+		MoveBarrelTo(AimDirection);
 	}
 
 
 
 
 	
+}
+
+void UTankAimingComponent::MoveBarrelTo(FVector AimDirection)
+{
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
+	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator %s"), *AimAsRotator.ToString());
+
 }
