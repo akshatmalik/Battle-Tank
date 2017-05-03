@@ -17,7 +17,7 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	UTankBarrel * TankAimingComponent = nullptr;
+	UTankAimingComponent * TankAimingComponent = nullptr;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
